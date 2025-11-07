@@ -13,7 +13,7 @@ export default function Search({ navigation }) {
   const [maa, setMaa] = useState("Afghanistan"); 
   const [countrylist, setCountryList] = useState([]);
 
-  console.log(maa);
+  console.log(city);
 
     function fetchCountries() {
     fetch('https://countriesnow.space/api/v0.1/countries') 
@@ -36,9 +36,9 @@ export default function Search({ navigation }) {
       .then(response => response.json())
       .then(data => {
         // Process and set cities if fetched from an API
-       const Finland = data.data.filter(c => c.country === maa);
-       const finnishCities = Finland[0].cities;
-        setCityList(finnishCities);
+       const Cities = data.data.filter(c => c.country === maa);
+       const allCities = Cities[0].cities;
+        setCityList(allCities);
       })
       .catch(error => {
         console.error('Error fetching cities:', error);
@@ -47,13 +47,16 @@ export default function Search({ navigation }) {
   
 
   function fetchWeather(){
+    console.log("📍 City before fetch:", city);
+
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&mode=xml&appid=${API_KEY}&units=metric`)
     .then((response) => response.text())
-    .then((xmlText) => {
-      const parser = new XMLParser();
+    .then((xmlText) => {const parser = new XMLParser({ignoreAttributes: false, attributeNamePrefix: "@_",});
       const json = parser.parse(xmlText);
-      setWeather(json.current);
-      navigation.navigate("Results", {weather:json.current});
+      const weatherData = json.current
+        console.log("🔍 Full parsed XML JSON:", JSON.stringify(json, null, 2));
+      setWeather(weatherData)
+      navigation.navigate("Results", {weather:weatherData,city:city,country:maa});
     }).catch((error) => {
       console.error("Error while fetching weather:", error);
     })
