@@ -1,24 +1,29 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import { PaperProvider } from 'react-native-paper';
 
 import Search from "./Search";
 import Results from "./Results";
+import Map from "./Map";
+import CityInfo from "./CityInfo";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 export default function App() {
-  const Tab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator();
 
   return (
+    <PaperProvider>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Results" component={Results} />
+        <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="CityInfo" component={CityInfo} />
       </Stack.Navigator>
     </NavigationContainer>
+    </PaperProvider>
   );
 }
 
