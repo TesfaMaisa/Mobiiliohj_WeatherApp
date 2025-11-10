@@ -2,6 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-paper";
 import * as SQLite from "expo-sqlite";
 import { useState, useEffect } from "react";
+import * as Haptics from 'expo-haptics';
+
 
 export default function Results({ route,navigation }) {
   const { weather, city, country, database } = route.params;
@@ -30,11 +32,11 @@ function map(){
       <View style={{ marginTop: 20 }}>
         <Text>Country: {country}</Text>
         <Text>City: {city}</Text>
-        <Text>Temperature: {weather?.temperature?.["@_value"] ? weather.temperature["@_value"] + '°C' : 'Not found'}</Text>
+        <Text>Temperature: {weather?.temperature?.["@_value"] ? weather.temperature["@_value"] +'°C' : 'Not found'}</Text>
         <Text>Wind: {weather?.wind.speed["@_value"] ? weather.wind.speed["@_value"] + ' m/s'  : 'Not found'}</Text>
         <Text>Condition: {weather?.weather["@_value"] ? weather?.weather["@_value"] : 'Not found' }</Text>
-        <Button style={{width:'100%',marginTop:20}} icon="star" mode="contained" onPress={saveData}>Add to favorites</Button>
-        <Button style={{width:'100%',marginTop:20}} icon="map-marker" mode="contained" onPress={map}>Show on map</Button>
+        <Button style={{width:'100%',marginTop:20}} icon="star" mode="contained" onPress={() => {saveData(),Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}>Add to favorites</Button>
+        <Button style={{width:'100%',marginTop:20}} icon="map-marker" mode="contained" onPress={() => {map(), Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}>Show on map</Button>
       </View>
     </View>
   );

@@ -20,7 +20,7 @@ export default function App() {
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Results" component={Results} />
         <Stack.Screen name="Map" component={Map} />
-        <Stack.Screen name="CityInfo" component={CityInfo} />
+        <Stack.Screen name="info" component={CityInfo} />
       </Stack.Navigator>
     </NavigationContainer>
     </PaperProvider>
