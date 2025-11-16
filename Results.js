@@ -14,7 +14,7 @@ export default function Results({ route,navigation }) {
     if(weather?.temperature["@_value"] != undefined){
   try {
     await database.runAsync('INSERT INTO weather (country, city, temperature, wind, condition) VALUES (?, ?, ?,?,? )', country, city, weather.temperature["@_value"], weather.wind.speed["@_value"], weather.weather["@_value"]);
-    navigation.navigate("Search")
+    navigation.navigate("Home")
   } catch (error) {
     console.error('Could not add item', error);
   }
@@ -35,8 +35,8 @@ function map(){
         <Text>Temperature: {weather?.temperature?.["@_value"] ? weather.temperature["@_value"] +'°C' : 'Not found'}</Text>
         <Text>Wind: {weather?.wind.speed["@_value"] ? weather.wind.speed["@_value"] + ' m/s'  : 'Not found'}</Text>
         <Text>Condition: {weather?.weather["@_value"] ? weather?.weather["@_value"] : 'Not found' }</Text>
-        <Button style={{width:'100%',marginTop:20}} icon="star" mode="contained" onPress={() => {saveData(),Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}>Add to favorites</Button>
-        <Button style={{width:'100%',marginTop:20}} icon="map-marker" mode="contained" onPress={() => {map(), Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}>Show on map</Button>
+        <Button style={{width:300,marginLeft:40,marginTop:10}}  icon="star" mode="contained" onPress={() => {saveData(),Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}>Add to favorites</Button>
+        <Button style={{width:300,marginLeft:40,marginTop:10}} icon="map-marker" mode="contained" onPress={() => {map(), Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}>Show on map</Button>
       </View>
     </View>
   );

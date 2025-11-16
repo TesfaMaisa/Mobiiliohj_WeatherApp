@@ -38,7 +38,7 @@ export default function CityInfo({ route, navigation }) {
     <Text>Temperature: {weather?.temperature?.["@_value"] ?? 'Loading'}°C</Text>
     <Text>Wind: {weather?.wind?.speed?.["@_value"] ?? 'Loading'} m/s</Text>
     <Text>Condition: {weather?.weather?.["@_value"] ?? 'Loading'}</Text>
-    <Button style={{width:'100%',marginTop:20}} icon="map-marker" mode="contained" onPress={() => {map(),Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}>Show on map</Button>
+    <Button style={{width:300,marginLeft:40,marginTop:10}}  icon="map-marker" mode="contained" onPress={() => {map(),Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)}}>Show on map</Button>
     </View>
   );
 }
