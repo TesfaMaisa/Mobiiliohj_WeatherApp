@@ -7,7 +7,6 @@ import * as Haptics from 'expo-haptics';
 
 export default function Results({ route,navigation }) {
   const { weather, city, country, database } = route.params;
-  const [list, setList] = useState([]);
     console.log(city)
 
   const saveData = async () => {

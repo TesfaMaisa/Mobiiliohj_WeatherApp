@@ -7,6 +7,7 @@ import Results from "./Results";
 import Map from "./Map";
 import CityInfo from "./CityInfo";
 import Homepage from "./Homepage";
+import MyLocation from "./MyLocation";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name="Results" component={Results} />
         <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="info" component={CityInfo} />
+        <Stack.Screen name="Current location" component={MyLocation} />
       </Stack.Navigator>
     </NavigationContainer>
     </PaperProvider>

@@ -17,7 +17,6 @@ const API_KEY = "509bdebf1443c150e91bf04c163c2d13";
 
 export default function Search({ navigation, route }) {
   const { db } = route.params;
-  const [list, setList] = useState([]);
   const [weather, setWeather] = useState("");
   const [city, setCity] = useState("");
   const [citylist, setCityList] = useState([]);
@@ -100,10 +99,6 @@ export default function Search({ navigation, route }) {
       {loadingCities && (
         <Text style={{ fontWeight: "bold" }}>Loading cities</Text>
       )}
-      <TextInput
-        placeholder="Type the name of the Country"
-        onChangeText={(theCountry) => setTheCountry(theCountry)}
-      ></TextInput>
       <Picker
         selectedValue={theCountry}
         onValueChange={(value) => setTheCountry(value)}
@@ -113,7 +108,14 @@ export default function Search({ navigation, route }) {
           <Picker.Item label={c} value={c} />
         ))}
       </Picker>
+        <TextInput
+        placeholder="Type the name of the country"
+        returnKeyType="done"
+        onChangeText={(theCountry) => setTheCountry(theCountry)}
+        style={{borderBottomWidth:1}}
+      ></TextInput>
       <Button
+      style={{marginTop:5}}
         mode="contained"
         onPress={() => {
           fetchCities(),
@@ -122,11 +124,6 @@ export default function Search({ navigation, route }) {
       >
         Select country
       </Button>
-     {type && <TextInput
-        placeholder="Type the name of the City"
-        onChangeText={(city) => setCity(city)}
-      ></TextInput>}
-
       <View style={{ flex: 1 }}>
         <Picker
           selectedValue={city}
@@ -137,7 +134,14 @@ export default function Search({ navigation, route }) {
             <Picker.Item label={c} value={c} />
           ))}
         </Picker>
+           {type && <TextInput
+           style={{borderBottomWidth:1}}
+           returnKeyType="done"
+        placeholder="Type the name of the city"
+        onChangeText={(city) => setCity(city)}
+      ></TextInput>}
         <Button
+        style={{marginTop:5}}
           mode="contained"
           onPress={() => {
             fetchWeather(),
